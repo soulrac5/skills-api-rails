@@ -1,0 +1,2 @@
+class SkillsLevel < ApplicationRecord
+end
