@@ -21,7 +21,6 @@ class Api::SkillsController < ApplicationController
 	def update
 		@skill = Skill.find(params[:id])
 		render json: {message: 'success'} if @skill.update(params_skill)
-
 	end
 
 	def show
