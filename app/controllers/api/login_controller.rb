@@ -11,7 +11,8 @@ class Api::LoginController < ApplicationController
 			@jwt = Knock::AuthToken.new( payload: { sub: @user.id, exp: @expire })
 			render json: {
 				token: @jwt.token,
-				expiration: Time.now + 30.days
+				expiration: Time.now + 30.days,
+				id: @user.id
 			}
 		else
 			render json: {message: 'username or password invalid', code: 100}, status: 400

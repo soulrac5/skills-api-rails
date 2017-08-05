@@ -6,7 +6,7 @@ json.array! @users do |user|
 	json.phone user.phone
 	json.indate user.indate
 	json.jobtitle user.jobtitle
-	json.fotolink user.fotolink
+	json.fotolink user.fotolink.url
 	json.country user.country
 	json.city user.city
 	json.ischangepassword user.ischangepassword

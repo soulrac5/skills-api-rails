@@ -1,11 +1,16 @@
 class User < ApplicationRecord
+  mount_uploader :fotolink, PhotoUploader
 	has_secure_password
+  #validations
+  validates_uniqueness_of :email
+  #relations
   has_many :skills
   has_many :skills_users
   belongs_to :rol
-  validates_uniqueness_of :email, message: 'email ya existe'
+  # callbacks
   before_create :set_is_change_password
   before_create :set_first_password
+
 
   private
   def set_is_change_password

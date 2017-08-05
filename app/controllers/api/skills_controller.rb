@@ -2,7 +2,10 @@ class Api::SkillsController < ApplicationController
 	before_action :authenticate_user
 
 	def index
+		@search = params[:search]
 		@skills = Skill.all
+		#filter search by name
+		@skills = Skill.where('lower(name) like ?', "%#{@search}%") if @search.present?
 	end
 
 	def create
