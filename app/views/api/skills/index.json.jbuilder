@@ -1,5 +1,5 @@
 json.array! @skills do |skill|
-	json.idSkill skill.id
+	json.idskill skill.id
 	json.name skill.name
 	json.idpeople do 
 		json.name skill.user.name
