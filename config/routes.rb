@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 		resources :login, only: [:create]
 		resources :users
 		resources :skills
+		get 'reports/tags', controller: :reports, action: :tags
 		resources :skills_users do 
 			collection do 
 				put 'update', action: :update_skills
