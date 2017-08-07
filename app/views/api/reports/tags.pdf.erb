@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <style media="screen">
+    body{font-family: 'Roboto', sans-serif;}
+    .regular{font-weight: 400;}
+    .medium{font-weight: 500;}
+    .bold{font-weight: 700;}
+    .bold li{padding-bottom: 10px;}
+    th,td{
+      text-align: center;
+    }
+    .tags{
+      background-color: #333132;
+      border-radius: 15px;
+      color: #fff;
+      padding: 5px;
+    }
+    .table thead th {
+      vertical-align: bottom;
+      border-bottom: 3px solid #212121;
+    }
+    .table td, .table th{
+      padding: .75rem;
+      vertical-align: top;
+      border-top: 0;
+    }
+
+    div.alwaysbreak { page-break-before: always; }
+    div.nobreak:before { clear:both; }
+    div.nobreak { page-break-inside: avoid; }
+  </style>
+
+  <script>
+  	 function number_pages() {
+        var vars={};
+        var x=document.location.search.substring(1).split('&');
+        for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = decodeURIComponent(z[1]);}
+        var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+        for(var i in x) {
+          var y = document.getElementsByClassName(x[i]);
+          for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+        }
+      }
+  </script>
+</head>
+<body onload="number_pages()">
+  <div style="background-color:#333132;color:#fff; padding:23px;
+  text-align:center;font-size: 1.5em;">
+    S&nbsp;&nbsp;K&nbsp;&nbsp;I&nbsp;&nbsp;L&nbsp;&nbsp;L&nbsp;&nbsp;S&nbsp;&nbsp;&nbsp;&nbsp;F&nbsp;&nbsp;I&nbsp;&nbsp;N&nbsp;&nbsp;D&nbsp;&nbsp;E&nbsp;&nbsp;R
+  </div>
+  <div style="background-color:#F36523;color:#fff;padding:15px;padding-left:20px;
+  padding-right:20px;font-size: 1em;">
+   S&nbsp;&nbsp;K&nbsp;&nbsp;I&nbsp;&nbsp;L&nbsp;&nbsp;L&nbsp;&nbsp;S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R&nbsp;&nbsp;E&nbsp;&nbsp;P&nbsp;&nbsp;O&nbsp;&nbsp;R&nbsp;&nbsp;T&nbsp;&nbsp;S
+
+   <div style="display: inline-block; float: right">
+   	Date: <%=DateTime.now.strftime('%Y-%m-%d %H:%M:%S %p')%>
+   </div>
+
+  </div>
+  <div style="padding-top:20px;padding-left:20px;padding-right:20px;">
+      <ul class="bold" style="font-size:0.8em; color:#212121;list-style-type: none;" >
+     
+      <li>User: <span class="regular" style="padding-left:5px;">admin@garonz.com</span></li>
+      <li>
+        Tags:
+        <%params[:tags].split(',').each do |tag|%>
+        	 <span class="tags"><%=tag.humanize%></span> 
+        <%end%>
+        <!--for para los tag-->
+      </li>
+    </ul
+  </div>
+  <table class="table medium">
+      <tr>
+        <th>Name</th>
+        <th>Mail</th>
+        <th>location</th>
+        <th>skills and levels</th>
+      </tr>
+    <tbody>
+    <%@users.each do |user|%>
+      <tr>
+        <td><%=" #{user.name} #{user.lastname} "%></td>
+        <td><%=user.email%></td>
+        <td><%=user.country%>, <%=user.city%> </td>
+        <td>
+        	<%@skills.each do |skill|%>
+        		<%skill_user = user.skills_users.find_by(skill_id: skill.id)%>
+        		<span>
+								<span> <span style="color: #F36523; "><%=skill_user.skill.name%> </span> - <%=skill_user.skills_level.name%> /
+        		</span>
+        	<%end%>
+        </td>
+      </tr>
+     <%end%>
+     
+    </tbody>
+  </table>
+
+  <footer style="text-align:center;">
+      <p class="regular" style="font-size:0.8em">Copyright. Skills Finder. 2017</p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+</html>

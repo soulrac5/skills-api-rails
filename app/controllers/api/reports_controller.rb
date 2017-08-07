@@ -5,8 +5,6 @@ class Api::ReportsController < ApplicationController
 		@tags =   @tags - @skills.map(&:name) # remove skills in tags
 		@levels = SkillsLevel.where('lower(name) in (?)', @tags)
 		@tags =   @tags - @levels.map(&:name) # remove levels in tags
-
-		render json: [] and return if @tags.present?
 		
 		# if has only skills
 		@users =  User
@@ -29,7 +27,14 @@ class Api::ReportsController < ApplicationController
 					where skills_users.user_id = users.id  and skills_users.skill_id in (?) and skills_users.skills_level_id = ?) >= ?
 		', @skills.pluck(:id),@levels.last.id, @skills.length) if @levels.present? and @skills.present?
 
+		respond_to do |format|
+			format.json do 
+				render json: [] and return if @tags.present?
+				render json: @users
+			end
+			format.pdf {render pdf: 'hello', orientation: 'Landscape', footer: { right: '[page] / [topage]' }}
+		end
 
-		render json: @users
+		
 	end
 end
