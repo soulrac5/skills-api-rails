@@ -46,6 +46,11 @@ class Api::UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+		render json:{message:'User has been Delete'} if @user.destroy
+	end
+	
  	def forgot_password
 		password_randow = SecureRandom.hex(3)
 		@user = User.find_by(email:params_user[:email])

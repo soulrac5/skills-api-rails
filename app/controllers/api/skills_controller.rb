@@ -27,6 +27,11 @@ class Api::SkillsController < ApplicationController
 		@skill = Skill.find(params[:id])
 	end
 
+	def destroy
+		@skill = Skill.find(params[:id])
+		render json: {message:'skill has been deleted'} if @skill.destroy
+	end
+
 	private
 	def params_skill
 		params.permit(:name)

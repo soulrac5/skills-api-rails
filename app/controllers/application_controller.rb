@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 	# include Knock::Authenticable
   protect_from_forgery with: :null_session
+  rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
 
   def authenticate_user
   	@token = request.headers['Authorization']
@@ -13,6 +14,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
   	@user_auth
+  end
+
+  def catch_not_found
+    render json: {message:'resouce not found'},status:404 and return
   end
 
 end
