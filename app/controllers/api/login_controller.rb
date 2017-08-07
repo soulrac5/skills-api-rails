@@ -12,8 +12,8 @@ class Api::LoginController < ApplicationController
 			@user.expire = @expire
 			@user.save!
 			render json: {
-				token: @jwt.token,
-				expiration: @expire,
+				token: @user.token,
+				expiration: @user.expire,
 				id: @user.id
 			}
 		else
