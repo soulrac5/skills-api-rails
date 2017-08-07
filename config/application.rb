@@ -9,6 +9,19 @@ require 'carrierwave/orm/activerecord'
 
 module SkillApi
   class Application < Rails::Application
+    #mailer
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+     address:              'smtp.office365.com',
+     port:                 587,
+     domain:               'example.com',
+     user_name:            ENV["OFFICE365_USERNAME"],
+     password:             ENV["OFFICE365_PASSWORD"],
+     authentication: :login,
+     enable_starttls_auto: true
+    }
+
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.middleware.insert_before 0, Rack::Cors do
