@@ -5,7 +5,7 @@ class User < ApplicationRecord
 	has_secure_password
   #validations
   validates_uniqueness_of :email
-  validates :password, length: {minimum:6}
+  # validates :password, length: {minimum:6}
   #relations
   has_many :skills
   has_many :skills_users
