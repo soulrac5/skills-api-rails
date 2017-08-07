@@ -10,7 +10,6 @@ class User < ApplicationRecord
   belongs_to :rol
   # callbacks
   before_create :set_is_change_password
-  before_create :set_first_password
 
 
   private
