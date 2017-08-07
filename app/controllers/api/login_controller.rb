@@ -9,6 +9,9 @@ class Api::LoginController < ApplicationController
 		if @user && @user.authenticate(params[:password])
 			@expire = Time.now.to_i + 30.days
 			@jwt = Knock::AuthToken.new( payload: { sub: @user.id, exp: @expire })
+			@user.token = @jwt.token 
+			@user.expire = Time.now + 30.days
+			@user.save
 			render json: {
 				token: @jwt.token,
 				expiration: Time.now + 30.days,

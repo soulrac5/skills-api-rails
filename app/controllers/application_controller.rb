@@ -1,5 +1,18 @@
 class ApplicationController < ActionController::Base
-	include Knock::Authenticable
+	# include Knock::Authenticable
   protect_from_forgery with: :null_session
+
+  def authenticate_user
+  	@token = request.headers['Authorization']
+  	render json:  {}, status: 401 and return if @token .blank?
+  	@token_auth = @token.split.last
+  	@user_auth = User.find_by token: @token_auth
+  	render json: {}, status: 401 and return  if @user_auth.present? and @user_auth.expire < DateTime.now
+  	render json: {}, status: 401  and return if @user_auth.blank?
+  end
+
+  def current_user
+  	@user_auth
+  end
 
 end
