@@ -18,8 +18,5 @@ class User < ApplicationRecord
   	self.ischangepassword = 'T'
   end
 
-  def set_first_password
-  	self.password = SecureRandom.hex(10)
-  end
 
 end
