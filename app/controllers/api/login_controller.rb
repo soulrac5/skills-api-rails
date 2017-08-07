@@ -11,7 +11,7 @@ class Api::LoginController < ApplicationController
 			@jwt = Knock::AuthToken.new( payload: { sub: @user.id, exp: @expire })
 			@user.token = @jwt.token 
 			@user.expire = Time.now + 30.days
-			@user.save
+			@user.save!
 			render json: {
 				token: @jwt.token,
 				expiration: Time.now + 30.days,
