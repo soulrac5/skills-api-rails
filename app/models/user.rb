@@ -6,6 +6,7 @@ class User < ApplicationRecord
   #validations
   validates_uniqueness_of :email
   # validates :password, length: {minimum:6}
+
   #relations
   has_many :skills
   has_many :skills_users

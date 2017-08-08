@@ -8,7 +8,7 @@ class Api::LoginController < ApplicationController
 		@user = User.find_by email: params[:email].to_s.downcase
 		if @user && @user.authenticate(params[:password])
 			@expire = DateTime.now + 30.days
-			@user.token = SecureRandom.hex(10)
+			@user.token = SecureRandom.hex(30)
 			@user.expire = @expire
 			@user.save!
 			render json: {
