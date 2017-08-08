@@ -12,7 +12,7 @@ class Api::SkillsController < ApplicationController
 		@skill = Skill.new(params_skill)
 		@skill.user_id = current_user.id
 		if @skill.save
-			render json: {message: 'skill has been created'}, status: 201
+			render 'show'
 		else
 			render json: @skill.errors.details, status: 400
 		end

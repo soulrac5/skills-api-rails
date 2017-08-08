@@ -5,7 +5,7 @@ class Api::LoginController < ApplicationController
 
 	#post /api/login
 	def create
-		@user = User.find_by email: params[:email]
+		@user = User.find_by email: params[:email].to_s.downcase
 		if @user && @user.authenticate(params[:password])
 			@expire = DateTime.now + 30.days
 			@user.token = SecureRandom.hex(10)
