@@ -37,7 +37,7 @@ class Api::ReportsController < ApplicationController
 		respond_to do |format|
 			format.json do
 				render json: [] and return if @tags.present?
-				render json: @users
+				render :index
 			end
 			format.pdf {render pdf: 'hello', orientation: 'Landscape', footer: { right: '[page] / [topage]' }}
 		end
