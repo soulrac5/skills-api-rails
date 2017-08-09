@@ -16,4 +16,5 @@ json.array! @users do |user|
 		json.idrol user.rol.id
 		json.name user.rol.name
 	end
+	json.skills @skills.map(&:name)
 end
