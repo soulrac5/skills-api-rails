@@ -66,12 +66,12 @@
   </div>
   <div style="padding-top:20px;padding-left:20px;padding-right:20px;">
       <ul class="bold" style="font-size:0.8em; color:#212121;list-style-type: none;" >
-     
+
       <li>User: <span class="regular" style="padding-left:5px;">admin@garonz.com</span></li>
       <li>
         Tags:
         <%params[:tags].split(',').each do |tag|%>
-        	 <span class="tags"><%=tag.humanize%></span> 
+        	 <span class="tags"><%=tag.humanize%></span>
         <%end%>
         <!--for para los tag-->
       </li>
@@ -89,7 +89,7 @@
       <tr>
         <td><%=" #{user.name} #{user.lastname} "%></td>
         <td><%=user.email%></td>
-        <td><%=user.country%>, <%=user.city%> </td>
+        <td><%=user.city.country.name%>, <%=user.city.name%> </td>
         <td>
         	<%@skills.each do |skill|%>
         		<%skill_user = user.skills_users.find_by(skill_id: skill.id)%>
@@ -100,7 +100,7 @@
         </td>
       </tr>
      <%end%>
-     
+
     </tbody>
   </table>
 
