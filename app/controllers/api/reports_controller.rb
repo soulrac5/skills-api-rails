@@ -9,7 +9,7 @@ class Api::ReportsController < ApplicationController
 		@tags = @tags - @countries.map(&:name) #remove countries in tags
 		# if has only skills
 		@users =  User
-		.includes(city: [:country])
+		.includes(:rol,city: [:country])
 		.joins(city: [:country])
 		.where('
 			(select count(skill_id) from skills_users
@@ -18,14 +18,14 @@ class Api::ReportsController < ApplicationController
 		) if @levels.blank?
 
 		# if has only level
-		@users = User.includes(city: [:country]).joins(city: [:country]).where('
+		@users = User.includes(:rol,city: [:country]).joins(city: [:country]).where('
 				(select count(skill_id) from skills_users
 					where skills_users.user_id = users.id  and skills_users.skills_level_id = ?) > 0
 		',@levels.last.id) if @levels.present? and @skills.blank?
 
 
 		# if has levels and skills
-		@users = User.includes(city: [:country]).joins(city: [:country]).where('
+		@users = User.includes(:rol,city: [:country]).joins(city: [:country]).where('
 				(select count(skill_id) from skills_users
 					where skills_users.user_id = users.id  and skills_users.skill_id in (?) and skills_users.skills_level_id = ?) >= ?
 		', @skills.pluck(:id),@levels.last.id, @skills.length) if @levels.present? and @skills.present?
