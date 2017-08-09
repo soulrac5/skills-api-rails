@@ -7,7 +7,7 @@ class Api::UsersController < ApplicationController
 		@users = User.includes(:rol, city: [:country])
 
 		#filter search by name or lastname
-		@users = @users.where("name like ? or lastname like ? ", "%#{@search}%", "#{@search}%") if @search.present?
+		@users = @users.where("lower(name) like ? or lower(lastname) like ? ", "%#{@search}%", "#{@search}%") if @search.present?
 
 		#filter order by
 		if @order_by
