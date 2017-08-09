@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 		end
 		resources :skills
 		get 'reports/tags', controller: :reports, action: :tags
+		get 'levels', controller: :skills, action: :levels
 		resources :skills_users do
 			collection do
 				put 'update', action: :update_skills
