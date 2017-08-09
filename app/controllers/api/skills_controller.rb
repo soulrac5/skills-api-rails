@@ -3,9 +3,9 @@ class Api::SkillsController < ApplicationController
 
 	def index
 		@search = params[:search]
-		@skills = Skill.includes(:user)
+		@skills = Skill.includes(:user).order(name: :asc)
 		#filter search by name
-		@skills = Skill.includes(:user).where('lower(name) like ?', "%#{@search}%") if @search.present?
+		@skills = Skill.includes(:user).where('lower(name) like ?', "%#{@search}%").order(name: :asc) if @search.present?
 	end
 
 	def levels
