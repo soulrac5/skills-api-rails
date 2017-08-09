@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807192618) do
+ActiveRecord::Schema.define(version: 20170809133215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_cities_on_country_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "logs", force: :cascade do |t|
     t.string "actionlog"
@@ -69,21 +83,23 @@ ActiveRecord::Schema.define(version: 20170807192618) do
     t.string "phone"
     t.string "skillsandlevel"
     t.string "statusflag"
-    t.string "country"
-    t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token"
     t.date "expire"
     t.datetime "deleted_at"
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["rol_id"], name: "index_users_on_rol_id"
   end
 
+  add_foreign_key "cities", "countries"
   add_foreign_key "logs", "users"
   add_foreign_key "skills", "users"
   add_foreign_key "skills_users", "skills"
   add_foreign_key "skills_users", "skills_levels"
   add_foreign_key "skills_users", "users"
+  add_foreign_key "users", "cities"
   add_foreign_key "users", "rols"
 end

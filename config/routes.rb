@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 				delete 'delete/:user_id/:skill_id', action: :delete_skills
 			end
 		end
+		resources :countries do
+			resources :cities
+		end
 	end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

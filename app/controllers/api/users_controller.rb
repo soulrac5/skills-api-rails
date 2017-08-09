@@ -4,7 +4,7 @@ class Api::UsersController < ApplicationController
 	def index
 		@search = params[:search]
 		@order_by = params[:order_by]
-		@users = User.all
+		@users = User.includes(:rol, city: [:country])
 
 		#filter search by name or lastname
 		@users = @users.where("name like ? or lastname like ? ", "%#{@search}%", "#{@search}%") if @search.present?
@@ -50,7 +50,7 @@ class Api::UsersController < ApplicationController
 		@user = User.find(params[:id])
 		render json:{message:'User has been Delete'} if @user.destroy
 	end
-	
+
  	def forgot_password
 		password_randow = SecureRandom.hex(3)
 		@user = User.find_by(email:params_user[:email])
@@ -77,6 +77,6 @@ class Api::UsersController < ApplicationController
 
 	private
 	def params_user
-		params.permit(:name, :rol_id, :lastname, :fotolink, :country, :city, :phone, :indate, :jobtitle, :email)
+		params.permit(:name, :rol_id, :lastname, :fotolink,:city_id, :phone, :indate, :jobtitle, :email)
 	end
 end
