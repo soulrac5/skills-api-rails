@@ -8,6 +8,10 @@ class Api::SkillsController < ApplicationController
 		@skills = Skill.includes(:user).where('lower(name) like ?', "%#{@search}%") if @search.present?
 	end
 
+	def levels
+		@skills_levels = SkillsLevel.all
+	end
+
 	def create
 		@skill = Skill.new(params_skill)
 		@skill.user_id = current_user.id
