@@ -25,7 +25,7 @@ class Api::UsersController < ApplicationController
 		@user.rol_id = @rol.id
 		if @user.save
 			UserMailer.sending_password(@user,password_randow).deliver_now
-			render json: {message: 'user has been created'}, status: 201
+			render :show
 		else
 			render json: @user.errors.details, status: 400
 		end
@@ -36,7 +36,7 @@ class Api::UsersController < ApplicationController
 		@user = User.find(params[:id])
 		params_update[:rol_id] = params[:idrol][:idrol] if params[:idrol].present?
 		if @user.update(params_update)
-			render json: {message: 'user has been updated'}
+			render :show
 		else
 			render json: @user.errors.details, status: 400
 		end
