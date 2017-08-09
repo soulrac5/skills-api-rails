@@ -6,8 +6,11 @@ json.phone @user.phone
 json.indate @user.indate
 json.jobtitle @user.jobtitle
 json.fotolink @user.fotolink.url
-json.country @user.country
-json.city @user.city
+json.country @user.city.country.name
+json.city @user.city.name
+json.city_id @user.city_id
+json.country_id  @user.city.try(:country_id)
+
 json.ischangepassword @user.ischangepassword
 json.idrol do 
 	json.idrol @user.rol.id 
