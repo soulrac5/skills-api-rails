@@ -14,6 +14,7 @@ class Api::SkillsController < ApplicationController
 
 	def create
 		@skill = Skill.new(params_skill)
+		authorize @skill
 		@skill.user_id = current_user.id
 		if @skill.save
 			render json: {message: 'skill has been created'}, status: 201
@@ -24,6 +25,7 @@ class Api::SkillsController < ApplicationController
 
 	def update
 		@skill = Skill.find(params[:id])
+		authorize @skill
 		render json: {message: 'success'} if @skill.update(params_skill)
 	end
 
@@ -33,6 +35,7 @@ class Api::SkillsController < ApplicationController
 
 	def destroy
 		@skill = Skill.find(params[:id])
+		authorize @skill
 		render json: {message:'skill has been deleted'} if @skill.destroy
 	end
 

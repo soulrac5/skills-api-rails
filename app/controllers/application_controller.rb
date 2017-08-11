@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   include Pundit
 	# include Knock::Authenticable
   protect_from_forgery with: :null_session
-  #rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorize
 
   def authenticate_user
   	@token = request.headers['Authorization']
@@ -19,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def catch_not_found
     render json: {message:'resouce not found'},status:404 and return
+  end
+
+  def not_authorize
+    render json: {message:'The user is not authorized to perform the operation'},status:403 and return
   end
 
 end

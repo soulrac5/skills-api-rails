@@ -1,6 +1,6 @@
 class Api::SkillsUsersController < ApplicationController
 	before_action :authenticate_user
-	
+
 	def index
 	end
 
@@ -12,8 +12,9 @@ class Api::SkillsUsersController < ApplicationController
 	def create
 		skills = params[:skills]
 		@user = User.find_by(id: params[:idpeople]) || current_user
+		authorize @user
 		begin
-			ActiveRecord::Base.transaction do 
+			ActiveRecord::Base.transaction do
 				skills.each do |skill|
 					skill_create = Skill.find_by name: skill[:name]
 					skill_create = Skill.create(name: skill[:name], user_id: @user.id) if skill_create.blank?
@@ -32,7 +33,8 @@ class Api::SkillsUsersController < ApplicationController
 	def update_skills
 		skills = params[:skills]
 		@user = User.find_by(id: params[:idpeople]) || current_user
-		ActiveRecord::Base.transaction do 
+		authorize @user
+		ActiveRecord::Base.transaction do
 			begin
 				skills.each do |skill|
 					@level = SkillsLevel.find_by!(code: skill[:level])
@@ -51,4 +53,3 @@ class Api::SkillsUsersController < ApplicationController
 		render json: {message: 'success'}
 	end
 end
-

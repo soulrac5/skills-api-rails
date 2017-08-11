@@ -18,6 +18,7 @@ class Api::UsersController < ApplicationController
 
 	def create
 		@user = User.new(params_user)
+		authorize @user
 		password_randow = SecureRandom.hex(3)
 		@user.password = password_randow
 		@user.email= params_user[:email].to_s.downcase
@@ -34,6 +35,7 @@ class Api::UsersController < ApplicationController
 	def update
 		params_update = params_user
 		@user = User.find(params[:id])
+		authorize @user
 		params_update[:rol_id] = params[:idrol][:idrol] if params[:idrol].present?
 		if @user.update(params_update)
 			render json: {message: 'user has been updated'}
@@ -48,6 +50,7 @@ class Api::UsersController < ApplicationController
 
 	def destroy
 		@user = User.find(params[:id])
+		authorize @user
 		render json:{message:'User has been Delete'} if @user.destroy
 	end
 
