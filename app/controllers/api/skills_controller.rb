@@ -3,9 +3,9 @@ class Api::SkillsController < ApplicationController
 
 	def index
 		@search = params[:search]
-		@skills = Skill.includes(:user)
+		@skills = Skill.includes(:user).order(name: :asc)
 		#filter search by name
-		@skills = Skill.includes(:user).where('lower(name) like ?', "%#{@search}%") if @search.present?
+		@skills = Skill.includes(:user).where('lower(name) like ?', "%#{@search}%").order(name: :asc) if @search.present?
 	end
 
 	def levels
@@ -14,6 +14,7 @@ class Api::SkillsController < ApplicationController
 
 	def create
 		@skill = Skill.new(params_skill)
+		authorize @skill
 		@skill.user_id = current_user.id
 		if @skill.save
 			render json: {message: 'success'}, status: 201
@@ -24,6 +25,7 @@ class Api::SkillsController < ApplicationController
 
 	def update
 		@skill = Skill.find(params[:id])
+		authorize @skill
 		render json: {message: 'success'} if @skill.update(params_skill)
 	end
 
@@ -33,6 +35,7 @@ class Api::SkillsController < ApplicationController
 
 	def destroy
 		@skill = Skill.find(params[:id])
+		authorize @skill
 		render json: {message:'skill has been deleted'} if @skill.destroy
 	end
 

@@ -9,6 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 gem 'figaro'
+gem 'pundit'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 gem "paranoia", "~> 2.2"
