@@ -6,10 +6,6 @@ class UserPolicy < ApplicationPolicy
   def update?
     @user.rol_id == 1
   end
-  #skills_users
-  def update_skills?
-    @user.rol_id == 1
-  end
   def destroy?
     @user.rol_id == 1
   end

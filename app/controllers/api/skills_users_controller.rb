@@ -12,7 +12,6 @@ class Api::SkillsUsersController < ApplicationController
 	def create
 		skills = params[:skills]
 		@user = User.find_by(id: params[:idpeople]) || current_user
-		authorize @user
 		begin
 			ActiveRecord::Base.transaction do
 				skills.each do |skill|
@@ -33,7 +32,6 @@ class Api::SkillsUsersController < ApplicationController
 	def update_skills
 		skills = params[:skills]
 		@user = User.find_by(id: params[:idpeople]) || current_user
-		authorize @user
 		ActiveRecord::Base.transaction do
 			begin
 				skills.each do |skill|
