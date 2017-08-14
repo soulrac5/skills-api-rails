@@ -1,4 +1,4 @@
-gem 'tzinfo-data'source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -22,7 +22,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'carrierwave-base64'
 gem 'wicked_pdf', git: 'https://github.com/mileszs/wicked_pdf.git'
 gem 'wkhtmltopdf-binary'
-gem 'tzinfo-data'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
