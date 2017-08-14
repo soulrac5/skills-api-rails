@@ -16,7 +16,7 @@ SkillsLevel.create name: 'regular', code: 1
 SkillsLevel.create name: 'master', code: 2
 
 
-Country.create name: 'egipto'
+Country.create name: 'egipt'
 Country.create name: 'usa'
 Country.create name: 'colombia'
 Country.create name: 'venezuela'

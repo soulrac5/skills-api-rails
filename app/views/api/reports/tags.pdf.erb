@@ -98,9 +98,25 @@
   								<span> <span style="color: #F36523; "><%=skill_user.skill.name%> </span> - <%=skill_user.skills_level.name%> /
           		</span>
           	<%end%>
-          <%else%>
-            
+          <%elsif @skills.blank? and @levels.present?%>
 
+            <%SkillsUser.includes(:skill, :skills_level).joins(:skills_level).where(user_id: user.id, skills_levels: {code: @levels.last.code})
+              .each do |skill|
+            %>
+            <span>
+                  <span> <span style="color: #F36523; "><%=skill.skill.name%> </span> - <%=skill.skills_level.name%> /
+              </span>
+
+            <%end%>
+          <%else%>
+             <%SkillsUser.includes(:skill, :skills_level).joins(:skills_level).where(user_id: user.id)
+              .each do |skill|
+            %>
+            <span>
+                  <span> <span style="color: #F36523; "><%=skill.skill.name%> </span> - <%=skill.skills_level.name%> /
+              </span>
+
+            <%end%>
           <%end%>
         </td>
       </tr>

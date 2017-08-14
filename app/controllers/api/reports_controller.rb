@@ -33,12 +33,11 @@ class Api::ReportsController < ApplicationController
 
 		@users = @users.where(countries: {id: @countries.last.id}) if @countries.present?
 
-
+		@users = [] if @tags.present?
 		respond_to do |format|
 			format.json do
 				authenticate_user
 				authorize @users
-				render json: [] and return if @tags.present?
 				render :index
 			end
 			format.pdf {render pdf: 'hello', orientation: 'Landscape', footer: { right: '[page] / [topage]' }}
