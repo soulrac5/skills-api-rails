@@ -37,7 +37,7 @@ class Api::ReportsController < ApplicationController
 		respond_to do |format|
 			format.json do
 				authenticate_user
-				authorize @users
+				authorize @users, currrent_user
 				render json: [] and return if @tags.present?
 				render :index
 			end
