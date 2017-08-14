@@ -4,15 +4,17 @@ class Api::UsersController < ApplicationController
 	def index
 		@search = params[:search]
 		@order_by = params[:order_by]
-		@users = User.includes(:rol, city: [:country]).order(name: :asc)
+		@users = User.includes(:rol, city: [:country]).order(name: :asc) if @search.present? || @order_by.present?
 
 		#filter search by name or lastname
 		@users = @users.where("lower(name) like ? or lower(lastname) like ? ", "%#{@search}%", "#{@search}%") if @search.present?
 		@is_order_by_location =  @order_by == 'country'
+
 		#filter order by
 		if @order_by
 			order = {"#{@order_by}": :asc}
-			@users = @users.order(order) unless @is_order_by_location
+			@users = User.includes(:rol, city: [:country]).order(order) unless @is_order_by_location
+
 			@users = User
 			.includes(:rol, city: [:country])
 			.joins(city: [:country])
