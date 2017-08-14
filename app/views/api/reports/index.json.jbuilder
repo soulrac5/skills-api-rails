@@ -16,6 +16,6 @@ json.array! @users do |user|
 		json.idrol user.rol.id
 		json.name user.rol.name
 	end
-	json.skills @skills.present? @skills.map(&:name) : Skill.where(id: SkillsUser.joins(:skills_level).where(user_id: user.id, skills_levels: {code: @levels.last.code}).pluck(:skill_id)).pluck(:name)
+	json.skills @skills.present? ? @skills.map(&:name) : Skill.where(id: SkillsUser.joins(:skills_level).where(user_id: user.id, skills_levels: {code: @levels.last.code}).pluck(:skill_id)).pluck(:name)
 
 end
