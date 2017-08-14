@@ -8,11 +8,15 @@ class Api::UsersController < ApplicationController
 
 		#filter search by name or lastname
 		@users = @users.where("lower(name) like ? or lower(lastname) like ? ", "%#{@search}%", "#{@search}%") if @search.present?
-
+		@is_order_by_location =  @order_by == 'country'
 		#filter order by
 		if @order_by
-			order = {"#{@order_by}": :desc}
-			@users = @users.order(order)
+			order = {"#{@order_by}": :asc}
+			@users = @users.order(order) unless @is_order_by_location
+			@users = User
+			.includes(:rol, city: [:country])
+			.joins(city: [:country])
+			.order("countries.name asc") if @is_order_by_location
 		end
 	end
 

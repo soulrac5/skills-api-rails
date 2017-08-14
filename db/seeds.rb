@@ -26,4 +26,13 @@ City.create country_id: 2,name: 'new york'
 City.create country_id: 3,name: 'cali'
 City.create country_id: 4,name: 'maracaibo'
 
-User.create email: 'prueba@garonz.com', password: '12345', rol_id: admin.id, name: 'jorge', lastname: 'hernandez'
+User.create email: 'prueba@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 4
+User.create email: 'jdaviderb@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 4
+User.create email: 'carlos@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 3
+User.create email: 'juan@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 1
+
+
+
+User.create email: 'admin@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 2
+User.create email: 'user@garonz.com', password: '123456', rol_id: user.id, name: 'jorge', lastname: 'hernandez', city_id: 1
+User.create email: 'watcher@garonz.com', password: '123456', rol_id: watcher.id, name: 'jorge', lastname: 'hernandez', city_id: 4
