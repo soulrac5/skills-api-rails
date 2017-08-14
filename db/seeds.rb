@@ -26,13 +26,13 @@ City.create country_id: 2,name: 'new york'
 City.create country_id: 3,name: 'cali'
 City.create country_id: 4,name: 'maracaibo'
 
-User.create email: 'prueba@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 4
-User.create email: 'jdaviderb@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 4
-User.create email: 'carlos@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 3
-User.create email: 'juan@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 1
+User.create email: 'prueba@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 4,ischangepassword: 'F'
+User.create email: 'jdaviderb@garonz.com', password: '123456', rol_id: admin.id, name: 'daniel', lastname: 'soto', city_id: 4,ischangepassword: 'F'
+User.create email: 'carlos@garonz.com', password: '123456', rol_id: admin.id, name: 'pedro', lastname: 'olivares', city_id: 3,ischangepassword: 'F'
+User.create email: 'juan@garonz.com', password: '123456', rol_id: admin.id, name: 'wilkerson', lastname: 'jonaikel', city_id: 1,ischangepassword: 'F'
 
 
 
-User.create email: 'admin@garonz.com', password: '123456', rol_id: admin.id, name: 'jorge', lastname: 'hernandez', city_id: 2
-User.create email: 'user@garonz.com', password: '123456', rol_id: user.id, name: 'jorge', lastname: 'hernandez', city_id: 1
-User.create email: 'watcher@garonz.com', password: '123456', rol_id: watcher.id, name: 'jorge', lastname: 'hernandez', city_id: 4
+User.create email: 'admin@garonz.com', password: '123456', rol_id: admin.id, name: 'admin', lastname: 'admin', city_id: 2,ischangepassword: 'F'
+User.create email: 'user@garonz.com', password: '123456', rol_id: user.id, name: 'user', lastname: 'user', city_id: 1,ischangepassword: 'F'
+User.create email: 'watcher@garonz.com', password: '123456', rol_id: watcher.id, name: 'watcher', lastname: 'watcher', city_id: 4, ischangepassword: 'F'
