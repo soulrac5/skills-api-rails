@@ -91,12 +91,17 @@
         <td><%=user.email%></td>
         <td><%=user.city.country.name%>, <%=user.city.name%> </td>
         <td>
-        	<%@skills.each do |skill|%>
-        		<%skill_user = user.skills_users.find_by(skill_id: skill.id)%>
-        		<span>
-								<span> <span style="color: #F36523; "><%=skill_user.skill.name%> </span> - <%=skill_user.skills_level.name%> /
-        		</span>
-        	<%end%>
+          <%if @skills.present? %>
+          	<%@skills.each do |skill|%>
+          		<%skill_user = user.skills_users.find_by(skill_id: skill.id)%>
+          		<span>
+  								<span> <span style="color: #F36523; "><%=skill_user.skill.name%> </span> - <%=skill_user.skills_level.name%> /
+          		</span>
+          	<%end%>
+          <%else%>
+            
+
+          <%end%>
         </td>
       </tr>
      <%end%>
