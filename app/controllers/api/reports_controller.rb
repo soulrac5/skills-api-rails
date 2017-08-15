@@ -37,7 +37,7 @@ class Api::ReportsController < ApplicationController
 		respond_to do |format|
 			format.json do
 				authenticate_user
-				authorize @users
+				authorize (@users.kind_of?(Array) ? User.new : @users)
 				render :index
 			end
 			format.pdf {render pdf: 'hello', orientation: 'Landscape', footer: { right: '[page] / [topage]' }}
