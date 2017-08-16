@@ -13,7 +13,7 @@ class Api::SkillsController < ApplicationController
 	end
 
 	def create
-		@skill = Skill.new(params_skill)
+		@skill = Skill.new(name: params_skill[:name].to_s.downcase)
 		authorize @skill
 		@skill.user_id = current_user.id
 		if @skill.save
@@ -26,7 +26,7 @@ class Api::SkillsController < ApplicationController
 	def update
 		@skill = Skill.find(params[:id])
 		authorize @skill
-		if @skill.update(params_skill)
+		if @skill.update(name: params_skill[:name].to_s.downcase)
 			render json: {message: 'success'}
 		else
 			render json: @skill.errors.details, status: 400
